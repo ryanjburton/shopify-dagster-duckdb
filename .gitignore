@@ -6,4 +6,4 @@ logs/dbt.log
 .DS_Store
 .venv/
 .env
-**/Untitled.ipynb
+**/test_env_notebook.ipynb
