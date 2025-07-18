@@ -1,1 +1,7 @@
+target/
+dbt_packages/
+.vscode/
+logs/dbt.log
+**/.DS_Store
+.DS_Store
 .venv/
