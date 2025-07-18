@@ -115,6 +115,30 @@ def extract_load_shopify_orders_data():
 
     con.execute("INSERT OR REPLACE INTO entities.shopify_order_line_items SELECT * FROM line_item_orders_df;")
 
+    ## Add a snapshot data for data versioning control downstream
+    orders_df['snapshot_date'] = datetime.now()
+
+    ## Re-establish DuckDB database connection for data loading and downstream transformation.
+    os.chdir('..')
+    subfolder_name = "duckdb_database"
+    os.chdir(subfolder_name)
+
+    con = db.connect("database.db")
+
+    ## Ensure the creation of an entities schema in the persisted DuckDB database to store data as a 1:1 relationship with upstream source.
+    entities_schema_name = "entities"
+    con.execute("CREATE SCHEMA IF NOT EXISTS entities_schema_name;")
+
+    ## Ensure the creation of an entities data table for Shopify Products in the persisted DuckDB database with a 1:1 relationship with the upstream Shopify Orders API. 
+    con.execute("CREATE TABLE IF NOT EXISTS entities.shopify_orders AS SELECT * FROM orders_df;")
+
+    try:
+        con.execute("ALTER TABLE entities.shopify_orders ADD PRIMARY KEY(id, snapshot_date);")
+    except db.duckdb.CatalogException:
+        pass
+
+    con.execute("INSERT OR REPLACE INTO entities.shopify_orders SELECT * FROM orders_df;")
+
     ## Close the current DuckDB connection
     con.close()
 

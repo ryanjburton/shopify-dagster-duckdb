@@ -1,0 +1,6 @@
+
+version: 2
+
+models:
+  - name: shopify_orders_raw
+    description: "Raw table for Shopify orders compiled by dbt project"
