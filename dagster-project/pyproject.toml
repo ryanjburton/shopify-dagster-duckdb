@@ -20,9 +20,9 @@ build-backend = "hatchling.build"
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "my_project"
+root_module = "dagster_project"
 registry_modules = [
-    "my_project.components.*",
+    "dagster_project.components.*",
 ]
 
 
