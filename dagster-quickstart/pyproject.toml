@@ -1,5 +1,5 @@
 [project]
-name = "dagster_project"
+name = "dagster_quickstart"
 requires-python = ">=3.9,<=3.13.3"
 version = "0.1.0"
 dependencies = [
@@ -20,9 +20,9 @@ build-backend = "hatchling.build"
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "dagster_project"
+root_module = "dagster_quickstart"
 registry_modules = [
-    "dagster_project.components.*",
+    "dagster_quickstart.components.*",
 ]
 
 
