@@ -422,32 +422,7 @@ wheels = [
 ]
 
 [[package]]
-name = "dagster-graphql"
-version = "1.11.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "dagster" },
-    { name = "gql", extra = ["requests"] },
-    { name = "graphene" },
-    { name = "requests" },
-    { name = "starlette" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/a5/8433180127c5656723aab71a2217b93ce31cbcbd9c17461a7ee4890f25fe/dagster_graphql-1.11.2.tar.gz", hash = "sha256:b758bf0c27d253ed9d5a49134ee07e535cddd6c57bf02c0ffbbcaece84e4bea8", size = 152960, upload-time = "2025-07-10T19:20:21.839Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/8a/a4/d706757d3b126e5d78a380d648538547440fc5b3dbac1a5598fd8161fed1/dagster_graphql-1.11.2-py3-none-any.whl", hash = "sha256:97ffa714b543810123f9d034a17fd1b2b6e10b2dabf983a7739b358b0c0d9929", size = 200114, upload-time = "2025-07-10T19:20:20.217Z" },
-]
-
-[[package]]
-name = "dagster-pipes"
-version = "1.11.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/50/f3/5c28e95aa952f93e22b5c6cc4046d08b3568f980f67814cc22797a91ab3f/dagster_pipes-1.11.2.tar.gz", hash = "sha256:a7705156a85ce596873d4f5af9664675a47bc7554a7a678736fd88903f856410", size = 20671, upload-time = "2025-07-10T19:20:18.004Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ef/a2/bf70c18caac77880b135d0ae0a3c6b4cbefdadff678d9d9dc92f805c2751/dagster_pipes-1.11.2-py3-none-any.whl", hash = "sha256:c2e36f743efd5103373991a5e62aad91754a400d6df1433f6b006032fc7bfc23", size = 20406, upload-time = "2025-07-10T19:20:16.637Z" },
-]
-
-[[package]]
-name = "dagster-quickstart"
+name = "dagster-extract-transform-duckdb"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -471,6 +446,31 @@ requires-dist = [
 dev = [
     { name = "dagster-dg-cli" },
     { name = "dagster-webserver" },
+]
+
+[[package]]
+name = "dagster-graphql"
+version = "1.11.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dagster" },
+    { name = "gql", extra = ["requests"] },
+    { name = "graphene" },
+    { name = "requests" },
+    { name = "starlette" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e9/a5/8433180127c5656723aab71a2217b93ce31cbcbd9c17461a7ee4890f25fe/dagster_graphql-1.11.2.tar.gz", hash = "sha256:b758bf0c27d253ed9d5a49134ee07e535cddd6c57bf02c0ffbbcaece84e4bea8", size = 152960, upload-time = "2025-07-10T19:20:21.839Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8a/a4/d706757d3b126e5d78a380d648538547440fc5b3dbac1a5598fd8161fed1/dagster_graphql-1.11.2-py3-none-any.whl", hash = "sha256:97ffa714b543810123f9d034a17fd1b2b6e10b2dabf983a7739b358b0c0d9929", size = 200114, upload-time = "2025-07-10T19:20:20.217Z" },
+]
+
+[[package]]
+name = "dagster-pipes"
+version = "1.11.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/50/f3/5c28e95aa952f93e22b5c6cc4046d08b3568f980f67814cc22797a91ab3f/dagster_pipes-1.11.2.tar.gz", hash = "sha256:a7705156a85ce596873d4f5af9664675a47bc7554a7a678736fd88903f856410", size = 20671, upload-time = "2025-07-10T19:20:18.004Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ef/a2/bf70c18caac77880b135d0ae0a3c6b4cbefdadff678d9d9dc92f805c2751/dagster_pipes-1.11.2-py3-none-any.whl", hash = "sha256:c2e36f743efd5103373991a5e62aad91754a400d6df1433f6b006032fc7bfc23", size = 20406, upload-time = "2025-07-10T19:20:16.637Z" },
 ]
 
 [[package]]

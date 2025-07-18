@@ -2,8 +2,8 @@ import pandas as pd
 
 import dagster as dg
 
-sample_data_file = "src/dagster_quickstart/defs/data/sample_data.csv"
-processed_data_file = "src/dagster_quickstart/defs/data/processed_data.csv"
+sample_data_file = "src/dagster_extract_transform_duckdb/defs/data/sample_data.csv"
+processed_data_file = "src/dagster_extract_transform_duckdb/defs/data/processed_data.csv"
 
 
 @dg.asset

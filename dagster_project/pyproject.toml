@@ -1,5 +1,5 @@
 [project]
-name = "dagster_quickstart"
+name = "dagster_extract_transform_duckdb"
 requires-python = ">=3.9,<=3.13.3"
 version = "0.1.0"
 dependencies = [
@@ -21,9 +21,9 @@ build-backend = "hatchling.build"
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "dagster_quickstart"
+root_module = "dagster_extract_transform_duckdb"
 registry_modules = [
-    "dagster_quickstart.components.*",
+    "dagster_extract_transform_duckdb.components.*",
 ]
 
 
