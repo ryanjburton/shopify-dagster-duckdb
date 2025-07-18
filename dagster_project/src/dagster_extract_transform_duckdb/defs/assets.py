@@ -81,14 +81,15 @@ def extract_load_shopify_orders_data():
         "Content-Type": "application/json"
     }
 
-    ## Fetching products data
-    products_url = f"https://{shop_url}/admin/api/{api_version}/products.json"
-    response = req.get(products_url, headers=headers)
-    products_data = response.json().get("products", [])
-    products_df = pd.DataFrame(products_data)
+    ## Fetching orders data by SKU line items
+    orders_url = f"https://{shop_url}/admin/api/{api_version}/orders.json"
+    response = req.get(orders_url, headers=headers)
+    orders_data = response.json().get("orders", [])
+    orders_df = pd.DataFrame(orders_data)
+    line_item_orders_df = pd.json_normalize(orders_df.line_items[0])
 
     ## Add a snapshot data for data versioning control downstream
-    products_df['snapshot_date'] = datetime.now()
+    line_item_orders_df['snapshot_date'] = datetime.now()
 
     ## Re-establish DuckDB database connection for data loading and downstream transformation.
     os.chdir('..')
@@ -102,13 +103,13 @@ def extract_load_shopify_orders_data():
     con.execute("CREATE SCHEMA IF NOT EXISTS entities_schema_name;")
 
     ## Ensure the creation of an entities data table for Shopify Products in the persisted DuckDB database with a 1:1 relationship with the upstream Shopify Orders API. 
-    con.execute("CREATE TABLE IF NOT EXISTS entities.shopify_products AS SELECT * FROM products_df;")
+    con.execute("CREATE TABLE IF NOT EXISTS entities.shopify_order_line_items AS SELECT * FROM line_item_orders_df;")
 
     try:
-        con.execute("ALTER TABLE entities.shopify_products ADD PRIMARY KEY(id, snapshot_date);")
+        con.execute("ALTER TABLE entities.shopify_order_line_items ADD PRIMARY KEY(id, snapshot_date);")
     except db.duckdb.CatalogException:
         pass
 
-    con.execute("INSERT OR REPLACE INTO entities.shopify_products SELECT * FROM products_df;")
+    con.execute("INSERT OR REPLACE INTO entities.shopify_order_line_items SELECT * FROM line_item_orders_df;")
 
-    return "Shopify - Products data successfully written to DuckDB database"
+    return "Shopify - Orders data successfully written to DuckDB database"

@@ -7,3 +7,4 @@ logs/dbt.log
 .venv/
 .env
 **/test_env_notebook.ipynb
+**/.ipynb_checkpoints
