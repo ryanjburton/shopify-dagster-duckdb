@@ -1,5 +1,5 @@
 [project]
-name = "my_project"
+name = "dagster_project"
 requires-python = ">=3.9,<=3.13.3"
 version = "0.1.0"
 dependencies = [
