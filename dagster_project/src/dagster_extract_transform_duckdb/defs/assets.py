@@ -35,6 +35,9 @@ def establish_duck_db_conn():
             f"Database Connection issue: Null Data"
         )
 
+    ## Close the current DuckDB connection
+    con.close()
+
     return "Database connection successful"
 
 
@@ -112,4 +115,30 @@ def extract_load_shopify_orders_data():
 
     con.execute("INSERT OR REPLACE INTO entities.shopify_order_line_items SELECT * FROM line_item_orders_df;")
 
+    ## Close the current DuckDB connection
+    con.close()
+
     return "Shopify - Orders data successfully written to DuckDB database"
+
+
+@dg.asset(deps=[extract_load_shopify_orders_data])
+def extract_for_parabola_ingestion():
+    ## Re-establish DuckDB database connection for data loading and downstream transformation.
+    os.chdir('..')
+    subfolder_name = "duckdb_database"
+    os.chdir(subfolder_name)
+
+    con = db.connect("database.db")
+
+    ## Create a new dataframe to store Shopify Order Line Items data
+    order_line_items_df = con.sql("SELECT * FROM entities.shopify_order_line_items;").df()
+
+    ## Change working directory to ensure CSV write is located in the repos root directory.
+    os.chdir('..')
+    subfolder_name = "extracted_data_for_parabola"
+    os.chdir(subfolder_name)
+
+    ## Write the dataframe to a persisted CSV file. Note that the location of this CSV is immutable as it is essential for Parabola worflow ingestion success.
+    order_line_items_df.to_csv('shopify_order_line_items_raw_data.csv', index=False)
+
+    return "Shopify - Orders data successfully extract from DuckDB database and written to CSV"
