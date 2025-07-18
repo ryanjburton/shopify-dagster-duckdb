@@ -1,8 +1,8 @@
 # shopify-dagster-duckdb
 Test playground implementation of Shopify API data extraction and transformation, orchestrated via Dagster and stored in a persisted DuckDB database.
 
-## Installation and Setup
-To install all relevant packages via `uv` and activate your virtual environment execute the below commands:
+## Installation and Setup - Dagster Project
+Begin by moving your working directory to ~/shopify-dagster-duckdb/dagster-quickstart. Next, execute the following commands to install all relevant packages via `uv` and activate your virtual environment:
 
 ```bash
 uv venv
